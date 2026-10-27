@@ -147,6 +147,8 @@ def main():
     shutil.copytree(os.path.join(ARCH, "gallery"), os.path.join(OUT, "gallery"),
                     ignore=shutil.ignore_patterns("*.md"))
     shutil.copy(os.path.join(os.path.dirname(__file__), "style.css"), OUT)
+    write(os.path.join(OUT, "CNAME"), "caroltownsend.com\n")
+    write(os.path.join(OUT, ".nojekyll"), "")
 
     # individual post pages
     for p in posts:
