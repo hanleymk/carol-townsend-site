@@ -17,6 +17,7 @@ import markdown
 ARCH = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 OUT = os.path.join(ARCH, "docs")
 PER_PAGE = 10
+CONTACT_URL = "https://script.google.com/macros/s/AKfycbzu6kdYVUPhYrNXcghPL_aZRmjJNCIauRQs4B1erO9ykOy9F_TE07WOppQx5_FrtdRi/exec"
 SITE_NAME = "Carol Townsend Fan Site"
 TAGLINE = "Your first stop for all things relating to Carol Townsend's meteoric rise to stardom"
 
@@ -197,9 +198,31 @@ def main():
     write(os.path.join(OUT, "about.html"),
           page(0, "About Carol", f'<h1>About Carol</h1>{about_html}<p><em>Who am I? I\'m her biggest fan!</em></p>', "about.html"))
 
-    # contact (placeholder until Mark supplies a contact method)
-    write(os.path.join(OUT, "contact.html"),
-          page(0, "Contact", '<h1>Contact</h1><p>Contact details will go here.</p>', "contact.html"))
+    # contact form -> Google Apps Script -> private Google Sheet (+ email to owner)
+    form = """<h1>Contact</h1>
+<p>Want to say hello to Carol, ask about a show, or share a memory? Send a note below.</p>
+<form id="cf" class="cform">
+<label>Your name <span class="small">(optional)</span><input name="name" maxlength="100" autocomplete="name"></label>
+<label>Your email <span class="small">(optional, only if you'd like a reply)</span><input name="email" type="email" maxlength="150" autocomplete="email"></label>
+<label>Message<textarea name="message" rows="7" maxlength="3000" required></textarea></label>
+<div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<button type="submit">Send message</button>
+<p id="cf-status" class="small" role="status"></p>
+</form>
+<script>
+(function(){
+var URL="__CONTACT_URL__",t0=Date.now(),f=document.getElementById("cf"),st=document.getElementById("cf-status"),b=f.querySelector("button");
+f.addEventListener("submit",function(e){
+ e.preventDefault();b.disabled=true;st.textContent="Sending…";
+ var d=new URLSearchParams(new FormData(f));d.set("elapsed",String(Date.now()-t0));
+ fetch(URL,{method:"POST",body:d}).then(function(r){return r.json()}).then(function(j){
+  if(j.status==="ok"){f.reset();st.textContent="Thank you! Your message was sent.";}
+  else{st.textContent=j.message||"Sorry, something went wrong. Please try again.";b.disabled=false;}
+ }).catch(function(){st.textContent="Sorry, that didn't go through. Please try again in a bit.";b.disabled=false;});
+});
+})();
+</script>""".replace("__CONTACT_URL__", CONTACT_URL)
+    write(os.path.join(OUT, "contact.html"), page(0, "Contact", form, "contact.html"))
 
     print(f"posts={len(posts)} home_pages={len(pages)} years={len(by_year)} gallery={len(gfiles)}")
 
