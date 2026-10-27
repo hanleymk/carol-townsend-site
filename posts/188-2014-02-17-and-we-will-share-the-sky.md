@@ -4,7 +4,7 @@ date: 2014-02-17
 source: squarespace
 original_url: https://www.caroltownsend.com/blog/2014/2/17/and-we-will-share-the-sky
 see_also: https://caroltownsendfan.blogspot.com/2014/02/and-we-will-share-sky.html
-images_present: 4
+images_present: 2
 images_missing: 0
 comments: 2
 words: 206
@@ -47,11 +47,7 @@ Box Office:
 
 ![1620450_10152590124573047_1328661981_n.jpg](../images/2014-02-17-and-we-will-share-the-sky__1620450_10152590124573047_1328661981_n.jpg)
 
-![1620450_10152590124573047_1328661981_n.jpg](../images/2014-02-17-and-we-will-share-the-sky__1620450_10152590124573047_1328661981_n.jpg)
-
                 
-
-![awwsts-poster-smaller.jpg](../images/2014-02-17-and-we-will-share-the-sky__awwsts-poster-smaller.jpg)
 
 ![awwsts-poster-smaller.jpg](../images/2014-02-17-and-we-will-share-the-sky__awwsts-poster-smaller.jpg)
 
